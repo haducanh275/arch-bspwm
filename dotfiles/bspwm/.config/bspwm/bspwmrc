@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# ===== start sxhkd (keybind daemon) =====
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+# ===== workspaces =====
+bspc monitor -d 1 2 3 4 5
+
+# ===== rules (auto workspace) =====
+bspc rule -a Brave-browser desktop='^2'
+bspc rule -a firefox desktop='^2'
+
+bspc rule -a Code desktop='^1'
+bspc rule -a Alacritty desktop='^1'
+
+bspc rule -a Thunar desktop='^3'
+bspc rule -a Yazi desktop='^3'
+
+# ===== floating windows =====
+bspc rule -a Pavucontrol state=floating
+bspc rule -a Blueman-manager state=floating
+bspc rule -a Nm-connection-editor state=floating
+bspc rule -a feh state=floating
+bspc rule -a sxiv state=floating
+
+# ===== basic config =====
+bspc config border_width         2
+bspc config window_gap          12
+
+bspc config split_ratio         0.52
+bspc config borderless_monocle  true
+bspc config gapless_monocle     true
+
+# ===== colors (Nordic vibe) =====
+bspc config focused_border_color "#81A1C1"
+bspc config normal_border_color  "#3B4252"
+bspc config active_border_color  "#88C0D0"
+
+# ===== autostart apps =====
+
+# wallpaper (safe check)
+WALL="$HOME/.config/bspwm/wall.jpg"
+[ -f "$WALL" ] && feh --bg-fill "$WALL" &
+
+# compositor
+pgrep -x picom > /dev/null || picom -b &
+
+# notification daemon
+pgrep -x dunst > /dev/null || dunst &
+
+# clipboard manager
+pgrep -x greenclip > /dev/null || greenclip daemon &
+
+# network tray
+pgrep -x nm-applet > /dev/null || nm-applet &
+
+# polybar
+[ -x "$HOME/.config/polybar/launch.sh" ] && "$HOME/.config/polybar/launch.sh" &

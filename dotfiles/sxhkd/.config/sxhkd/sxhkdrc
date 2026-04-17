@@ -1,0 +1,102 @@
+# =========================
+# BASIC CONTROLS
+# =========================
+
+# terminal
+super + Return
+    alacritty
+
+# close window
+super + q
+    bspc node -c
+
+# restart bspwm
+super + shift + r
+    bspc wm -r
+
+# =========================
+# APP LAUNCHER
+# =========================
+
+# rofi (giống win + d / search)
+super + d
+    rofi -show drun
+
+# clipboard (win + v vibe)
+super + v
+    rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+
+# =========================
+# FILE MANAGER
+# =========================
+
+# win + e
+super + e
+    thunar
+
+# =========================
+# WINDOW NAVIGATION
+# =========================
+
+# focus window (vim style)
+super + {h,j,k,l}
+    bspc node -f {west,south,north,east}
+
+# move window
+super + shift + {h,j,k,l}
+    bspc node -s {west,south,north,east}
+
+# resize window
+super + alt + {h,j,k,l}
+    bspc node -z {left -20 0,down 0 20,up 0 -20,right 20 0}
+
+# =========================
+# WORKSPACES
+# =========================
+
+# switch workspace
+super + {1-5}
+    bspc desktop -f '^{1-5}'
+
+# move window to workspace
+super + shift + {1-5}
+    bspc node -d '^{1-5}'
+
+# =========================
+# LAYOUT
+# =========================
+
+# toggle fullscreen
+super + f
+    bspc node -t fullscreen
+
+# toggle floating
+super + space
+    bspc node -t floating
+
+# =========================
+# SYSTEM
+# =========================
+
+# screenshot
+Print
+    flameshot gui
+
+# volume up
+XF86AudioRaiseVolume
+    pamixer -i 5
+
+# volume down
+XF86AudioLowerVolume
+    pamixer -d 5
+
+# mute
+XF86AudioMute
+    pamixer -t
+
+# =========================
+# LOCK SCREEN
+# =========================
+
+super + l
+    i3lock
